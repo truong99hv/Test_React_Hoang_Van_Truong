@@ -1,0 +1,102 @@
+.banner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #da2a1c;
+}
+.banner a img {
+  height: 70px;
+}
+
+.banner .title-banner {
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  color: #fff;
+}
+
+.main-login {
+  margin-top: 72px;
+  background-image: url("https://loainguycap.ceid.gov.vn/static/img/footerLogin.cf032540.svg");
+  height: 625px;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+.form-login {
+  max-width: 450px;
+  border-radius: 25px;
+  box-shadow: rgba(253, 178, 206, 0.47) 0px 2px 20px;
+  background-color: #fff;
+  text-align: center;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.title-form {
+  font-family: SVN-Product Sans, sans-serif !important;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.username,
+.password {
+  /* width: 100%; */
+  border: 1px solid rgb(241, 236, 236);
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.input-username,
+.input-password {
+  width: 100%;
+  outline: none;
+  height: 100%;
+  padding: 5px 0;
+  border: none;
+}
+.username span,
+.password span {
+  margin-right: 10px;
+  color: rgb(137, 133, 128);
+}
+
+.btn-login {
+  padding: 10px;
+  width: 100%;
+  border-radius: 30px;
+  color: #fff;
+  background-color: #da2a1c;
+  font-weight: 500;
+  letter-spacing: 0.0892857143em;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  opacity: 0.8;
+}
+
+.error-message {
+  text-align: left;
+  font-size: 12px;
+  color: #f43d30;
+  margin: 5px;
+}
+
+.focused {
+  border: 1px solid #da2a1c;
+}
+.btn-login:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+/* .username.focused,
+.password.focused {
+  border-color: #007bff;
+} */

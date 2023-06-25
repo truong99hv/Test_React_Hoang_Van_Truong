@@ -1,0 +1,157 @@
+.link-logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fbfbfb;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  z-index: 2;
+  height: 100%;
+  position: relative;
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.title-header {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 0;
+  font-family: SVN-Product Sans, sans-serif;
+}
+.link-logo {
+  height: 40px;
+  display: block;
+  margin-left: 15px;
+  margin-right: 20px;
+}
+
+.btn-menu {
+  align-self: center;
+  border-radius: 30px;
+}
+
+.right-header {
+  height: 100%;
+  margin-right: 20px;
+}
+
+.btn-user {
+  height: 100%;
+  padding: 7px 40px;
+  border: none;
+  background-color: #fbfbfb;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn-user:hover {
+  background-color: #f3e9e9;
+}
+
+.btn-user:hover .name-user {
+  color: #222020;
+}
+
+.avatar-user {
+  height: 36px;
+  min-width: 36px;
+  width: 36px;
+  background-color: rgb(0, 137, 123);
+  /* border-color: rgb(0, 137, 123); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fbfbfb;
+  margin-right: 10px;
+}
+
+.avatar-user img {
+  width: 100%;
+}
+
+.name-user {
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #222020;
+}
+
+.popover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 240px;
+}
+
+.list-btn {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.ant-layout-sider {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  height: 100vh;
+}
+
+.avatar-big {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 15px !important;
+}
+
+.avatar-big img {
+  width: 100%;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.btn-file span {
+  color: #222020;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-file:hover {
+  background-color: #f3e9e9;
+}
+
+.btn-logout span {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(228, 66, 66);
+}
+
+.btn-logout:hover span {
+  color: rgb(228, 66, 66);
+}
+.btn-file:hover span {
+  color: #222020;
+}
+
+.btn-logout:hover {
+  background-color: #e6adad;
+}
+
+.menu-items {
+  height: 100%;
+}

@@ -1,19 +1,25 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Create from "./CrudProject/Create";
-import Read from "./CrudProject/Read";
-import Update from "./CrudProject/Update";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/Login/PrivateRoute";
+import Login from "./components/Login/Login";
+import System from "./components/System/System";
+import AddNewSpecies from "./components/System/RareSpecies/AddNewSpecies";
 
 function App() {
   return (
-    <div className="container">
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Create />}></Route>
-          <Route path="/read" element={<Read />}></Route>
-          <Route path="/update" element={<Update />}></Route>
-        </Routes>
-      </BrowserRouter>
+    <div>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="" element={<PrivateRoute />}>
+              <Route exact path="/" element={<System />} />
+              <Route path="/them-moi" element={<AddNewSpecies />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
