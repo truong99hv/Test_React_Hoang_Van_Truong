@@ -1,5 +1,6 @@
 // import axios from "axios";
-import axios from "../services/customiz-axios";
+import axios from "./customize-axios";
+
 const fetchAllSpecies = (page, perpage, search) => {
   return axios.get(
     `species?paginate=true&page=${page}&perpage=${perpage}&with=roles,createdBy&search=${search}&inactive=-1`
@@ -24,10 +25,15 @@ const deleteSpecies = (id) => {
   return axios.delete(`species/${id}`);
 };
 
+const updateSpecies = (id, config) => {
+  return axios.put(`species/${id}`, config);
+};
+
 export {
   fetchAllSpecies,
   fetchAllClassify,
   createClassify,
   fetchAllConserve,
   deleteSpecies,
+  updateSpecies,
 };

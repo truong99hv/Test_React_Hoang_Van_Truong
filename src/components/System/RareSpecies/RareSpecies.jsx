@@ -3,7 +3,7 @@ import "./css/species.css";
 import { GiAnimalSkull } from "react-icons/gi";
 import { domain } from "../../../Constant/api";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteSpecies, fetchAllSpecies } from "../../../services/UserService";
 import { BsPencilFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
@@ -51,9 +51,45 @@ const RareSpecies = () => {
       setShowModal(false);
       toast.success(`Đã xóa thành công ${nameDelete}`);
     } catch (error) {
-      console.error("Error delete species:", error);
       toast.error("Không xóa thành công");
     }
+  };
+
+  const setToLocalStorage = (
+    id,
+    ten,
+    ten_khoa_hoc,
+    kingdom_id,
+    phylum_id,
+    class_id,
+    order_id,
+    family_id,
+    genus_id,
+    iucns,
+    sach_dos,
+    ten_tac_gia,
+    ten_dia_phuong,
+    nguon_du_lieu
+  ) => {
+    localStorage.setItem(
+      "configSpecies",
+      JSON.stringify({
+        id,
+        ten,
+        ten_khoa_hoc,
+        kingdom_id,
+        phylum_id,
+        class_id,
+        order_id,
+        family_id,
+        genus_id,
+        iucns,
+        sach_dos,
+        ten_tac_gia,
+        ten_dia_phuong,
+        nguon_du_lieu,
+      })
+    );
   };
 
   useEffect(() => {
@@ -78,6 +114,32 @@ const RareSpecies = () => {
     return Math.min(endIndex, totalPage);
   };
 
+  const navigate = useNavigate();
+
+  const handleCreateClick = () => {
+    navigate("/them-moi");
+  };
+
+  const handleUpdateClick = (item) => {
+    navigate("/cap-nhat");
+    setToLocalStorage(
+      item.id,
+      item.ten,
+      item.ten_khoa_hoc,
+      item.kingdom_id,
+      item.phylum_id,
+      item.class_id,
+      item.order_id,
+      item.family_id,
+      item.genus_id,
+      item.iucns,
+      item.sach_dos,
+      item.ten_tac_gia,
+      item.ten_dia_phuong,
+      item.nguon_du_lieu
+    );
+  };
+
   return (
     <>
       <div className="species ">
@@ -99,9 +161,14 @@ const RareSpecies = () => {
             />
           </div>
 
-          <Link to="/them-moi" className="col-2 float-end">
-            <button className="btn btn-danger float-end">Thêm mới</button>
-          </Link>
+          <div to="/them-moi" className="col-2 float-end">
+            <button
+              className="btn btn-danger float-end"
+              onClick={handleCreateClick}
+            >
+              Thêm mới
+            </button>
+          </div>
         </div>
 
         {listSpecies == "" ? (
@@ -170,7 +237,11 @@ const RareSpecies = () => {
                         <div className="d-flex justify-content-around">
                           <div className="update icon-action">
                             <Popover placement="bottom" content={"Cập nhật"}>
-                              <BsPencilFill />
+                              <BsPencilFill
+                                onClick={() => {
+                                  handleUpdateClick(item);
+                                }}
+                              />
                             </Popover>
                           </div>
 

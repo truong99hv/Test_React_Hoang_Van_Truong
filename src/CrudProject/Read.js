@@ -80,7 +80,7 @@ const Read = () => {
                           )
                         }
                       >
-                        Edit{" "}
+                        Edit
                       </button>
                     </Link>
                   </td>

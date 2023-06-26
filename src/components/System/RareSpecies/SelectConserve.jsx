@@ -2,7 +2,7 @@ import { Select } from "antd";
 import React from "react";
 
 const SelectConserve = (props) => {
-  const { dataConserve, nameConserve, handleConserve } = props;
+  const { dataConserve, nameConserve, handleConserve, valueUpdate } = props;
   const { Option } = Select;
   return (
     <>
@@ -12,6 +12,7 @@ const SelectConserve = (props) => {
         placeholder={nameConserve}
         size="large"
         onChange={handleConserve}
+        value={valueUpdate}
       >
         {dataConserve.map((item, index) => (
           <Option key={`${nameConserve}-${index}`} value={item.id}>

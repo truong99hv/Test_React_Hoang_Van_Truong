@@ -41,9 +41,7 @@ const LoginForm = () => {
         }
       );
 
-      // Kiểm tra kết quả đăng nhập từ response
       if (response.status === 200) {
-        // Đăng nhập thành công
         const accessToken = response.data.access_token;
         login(accessToken);
         navigate("/");

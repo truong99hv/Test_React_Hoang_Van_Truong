@@ -2,8 +2,13 @@ import { Select } from "antd";
 import React from "react";
 
 const SelectClassify = (props) => {
-  const { dataClassify, nameClassify, handleFilterClassify, handleClear } =
-    props;
+  const {
+    dataClassify,
+    nameClassify,
+    handleFilterClassify,
+    handleClear,
+    valueUpdate,
+  } = props;
   const { Option } = Select;
   return (
     <>
@@ -16,6 +21,7 @@ const SelectClassify = (props) => {
         size="large"
         onChange={handleFilterClassify}
         onClear={handleClear}
+        value={valueUpdate}
       >
         {dataClassify.map((item, index) => (
           <Option

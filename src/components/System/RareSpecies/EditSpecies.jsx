@@ -7,8 +7,8 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Input } from "antd";
 import {
   fetchAllClassify,
-  createClassify,
   fetchAllConserve,
+  updateSpecies,
 } from "../../../services/UserService";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -18,7 +18,7 @@ import SelectConserve from "./SelectConserve";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AddNewSpecies = () => {
+const EditSpecies = () => {
   const [classify, setClassify] = useState([]);
   const [selected, setSelected] = useState({
     selectedKingdom: null,
@@ -43,6 +43,7 @@ const AddNewSpecies = () => {
     genus: [],
   };
   const [ten, setTen] = useState("");
+  const [id, setId] = useState("");
   const [tenKhoaHoc, setTenKhoaHoc] = useState("");
   const [kingdomId, setKingdomId] = useState("");
   const [phylumId, setPhylumId] = useState("");
@@ -82,8 +83,7 @@ const AddNewSpecies = () => {
     } catch (error) {}
   };
 
-  const handleCreateSpecies = async (e) => {
-    e.preventDefault();
+  const handleUpdateSpecies = async (id) => {
     const config = {
       ten: ten,
       ten_khoa_hoc: tenKhoaHoc,
@@ -124,12 +124,11 @@ const AddNewSpecies = () => {
       },
       toa_dos: [],
     };
-    try {
-      let res = await createClassify(config);
-      toast.success("Thêm mới thành công !!!");
-      navigate("/");
 
-      setClassify(res);
+    try {
+      await updateSpecies(id, config);
+      toast.success("Cập nhật thành công ");
+      navigate("/");
     } catch (error) {
       toast.error(error.message);
       setErrorData(error.response.data.errors);
@@ -255,13 +254,30 @@ const AddNewSpecies = () => {
   };
 
   useEffect(() => {
+    const local = JSON.parse(localStorage.getItem("configSpecies"));
+    console.log(local);
     getClasstify();
     getConserve();
+    setId(local.id);
+    setTen(local.ten);
+    setTenKhoaHoc(local.ten_khoa_hoc);
+    setKingdomId(local.kingdom_id);
+    setPhylumId(local.phylum_id);
+    setclassId(local.class_id);
+    setOrderId(local.order_id);
+    setFamilyId(local.family_id);
+    setGenusId(local.genus_id);
+    setTenTacGia(local.ten_tac_gia);
+    setTenDiaPhuong(local.ten_dia_phuong);
+    setNguonDuLieu(local.nguon_du_lieu);
+    setYearRedBook(local.sach_dos[0].pivot.nam);
+    setCurrentRedBook(local.sach_dos[0].pivot.sach_do_id);
+    setYearIUCN(local.iucns[0].pivot.nam);
+    setCurrentIUCN(local.iucns[0].pivot.iucn_id);
   }, []);
-
   return (
     <>
-      <Header />
+      <Header />(
       <div className="content-create container">
         <div className="title-create">
           <span onClick={handleGoBack}>
@@ -284,9 +300,9 @@ const AddNewSpecies = () => {
               <Input
                 placeholder="Tên"
                 size="large"
+                value={ten}
                 onChange={(e) => setTen(e.target.value)}
               />
-
               {errorData.ten && <span className="error">{errorData.ten}</span>}
             </div>
             <div className="science-name input-info col-6 pe-3">
@@ -296,6 +312,7 @@ const AddNewSpecies = () => {
               <Input
                 placeholder="Tên khoa học"
                 size="large"
+                value={tenKhoaHoc}
                 onChange={(e) => setTenKhoaHoc(e.target.value)}
               />
               {errorData.ten_khoa_hoc && (
@@ -307,6 +324,7 @@ const AddNewSpecies = () => {
               <Input
                 placeholder="Tên Tác Giả"
                 size="large"
+                value={tenTacGia}
                 onChange={(e) => setTenTacGia(e.target.value)}
               />
             </div>
@@ -315,6 +333,7 @@ const AddNewSpecies = () => {
               <Input
                 placeholder="Tên Địa Phương"
                 size="large"
+                value={tenDiaPhuong}
                 onChange={(e) => setTenDiaPhuong(e.target.value)}
               />
             </div>
@@ -323,6 +342,7 @@ const AddNewSpecies = () => {
               <Input
                 placeholder="Nguồn Dữ Liệu"
                 size="large"
+                value={nguonDuLieu}
                 onChange={(e) => setNguonDuLieu(e.target.value)}
               />
             </div>
@@ -335,6 +355,7 @@ const AddNewSpecies = () => {
                   nameClassify="Giới"
                   dataClassify={listClassify.kingdom}
                   handleFilterClassify={handleKingdomChange}
+                  valueUpdate={kingdomId}
                 />
                 {errorData.kingdom_id && (
                   <span className="error">{errorData.kingdom_id}</span>
@@ -347,6 +368,7 @@ const AddNewSpecies = () => {
                   nameClassify="Ngành"
                   dataClassify={listOptions.phylumOptions}
                   handleFilterClassify={handlePhylumChange}
+                  valueUpdate={phylumId}
                 />
                 {errorData.phylum_id && (
                   <span className="error">{errorData.phylum_id}</span>
@@ -359,6 +381,7 @@ const AddNewSpecies = () => {
                   nameClassify="Lớp"
                   dataClassify={listOptions.classOptions}
                   handleFilterClassify={handleClassChange}
+                  valueUpdate={classId}
                 />
                 {errorData.class_id && (
                   <span className="error">{errorData.class_id}</span>
@@ -371,6 +394,7 @@ const AddNewSpecies = () => {
                   nameClassify="Bộ"
                   dataClassify={listOptions.orderOptions}
                   handleFilterClassify={handleOrderChange}
+                  valueUpdate={orderId}
                 />
                 {errorData.order_id && (
                   <span className="error">{errorData.order_id}</span>
@@ -383,6 +407,7 @@ const AddNewSpecies = () => {
                   nameClassify="Họ"
                   dataClassify={listOptions.familyOptions}
                   handleFilterClassify={handleFamilyChange}
+                  valueUpdate={familyId}
                 />
                 {errorData.family_id && (
                   <span className="error">{errorData.family_id}</span>
@@ -395,6 +420,7 @@ const AddNewSpecies = () => {
                   nameClassify="Chi"
                   dataClassify={listOptions.genusOptions}
                   handleFilterClassify={handleGenusChange}
+                  valueUpdate={genusId}
                 />
                 {errorData.genus_id && (
                   <span className="error">{errorData.genus_id}</span>
@@ -411,7 +437,11 @@ const AddNewSpecies = () => {
                 <div className="title-conserve col-12">Sách đỏ</div>
               </div>
               <div className="col-5">
-                <Selectyear nameLabel={"Năm"} valueYear={handleYearRedBook} />
+                <Selectyear
+                  nameLabel={"Năm"}
+                  valueYear={handleYearRedBook}
+                  valueUpdate={yearRedBook}
+                />
               </div>
 
               <div className="col-5">
@@ -419,13 +449,18 @@ const AddNewSpecies = () => {
                   dataConserve={rebBook}
                   nameConserve={" Hiện trạng "}
                   handleConserve={handleCurrentRedBook}
+                  valueUpdate={currentRedBook}
                 />
               </div>
             </div>
             <div className="iucn col-5 d-flex justify-content-between flex-wrap">
               <div className="title-conserve col-12">IUCN</div>
               <div className="col-5">
-                <Selectyear nameLabel={"Năm"} valueYear={handleYearIUCN} />
+                <Selectyear
+                  nameLabel={"Năm"}
+                  valueYear={handleYearIUCN}
+                  valueUpdate={yearIUCN}
+                />
               </div>
 
               <div className="col-5">
@@ -433,6 +468,7 @@ const AddNewSpecies = () => {
                   dataConserve={iucn}
                   nameConserve={" Hiện trạng "}
                   handleConserve={handleCurrentIUCN}
+                  valueUpdate={currentIUCN}
                 />
               </div>
             </div>
@@ -441,14 +477,13 @@ const AddNewSpecies = () => {
 
         <button
           className="btn btn-danger btn-create"
-          onClick={handleCreateSpecies}
+          onClick={() => handleUpdateSpecies(id)}
         >
-          Thêm mới
+          Cập nhật
         </button>
       </div>
-
+      )
       <Footer />
-
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -465,4 +500,4 @@ const AddNewSpecies = () => {
   );
 };
 
-export default AddNewSpecies;
+export default EditSpecies;
