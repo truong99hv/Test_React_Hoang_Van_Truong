@@ -121,7 +121,7 @@ const RareSpecies = () => {
   };
 
   const handleUpdateClick = (item) => {
-    navigate("/cap-nhat");
+    navigate(`/cap-nhat/${item.id}`);
     setToLocalStorage(
       item.id,
       item.ten,
@@ -171,7 +171,7 @@ const RareSpecies = () => {
           </div>
         </div>
 
-        {listSpecies == "" ? (
+        {search && listSpecies == "" ? (
           <div className="col-12 align-content-center">Không có dữ liệu </div>
         ) : (
           <div className="table-species">

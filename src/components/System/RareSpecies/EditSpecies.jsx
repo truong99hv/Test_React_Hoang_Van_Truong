@@ -127,7 +127,7 @@ const EditSpecies = () => {
 
     try {
       await updateSpecies(id, config);
-      toast.success("Cập nhật thành công ");
+      toast.success("Cập nhật thành công !!! ");
       navigate("/");
     } catch (error) {
       toast.error(error.message);
@@ -255,7 +255,6 @@ const EditSpecies = () => {
 
   useEffect(() => {
     const local = JSON.parse(localStorage.getItem("configSpecies"));
-    console.log(local);
     getClasstify();
     getConserve();
     setId(local.id);
@@ -270,14 +269,19 @@ const EditSpecies = () => {
     setTenTacGia(local.ten_tac_gia);
     setTenDiaPhuong(local.ten_dia_phuong);
     setNguonDuLieu(local.nguon_du_lieu);
-    setYearRedBook(local.sach_dos[0].pivot.nam);
-    setCurrentRedBook(local.sach_dos[0].pivot.sach_do_id);
-    setYearIUCN(local.iucns[0].pivot.nam);
-    setCurrentIUCN(local.iucns[0].pivot.iucn_id);
+    local.sach_dos
+      ? setYearRedBook(local.sach_dos[0].pivot.nam) &&
+        setCurrentRedBook(local.sach_dos[0].pivot.sach_do_id)
+      : setYearRedBook("") && setCurrentRedBook("");
+
+    local.iucns
+      ? setYearIUCN(local.iucns[0].pivot.nam) &&
+        setCurrentIUCN(local.iucns[0].pivot.iucn_id)
+      : setYearIUCN("") && setCurrentIUCN("");
   }, []);
   return (
     <>
-      <Header />(
+      <Header />
       <div className="content-create container">
         <div className="title-create">
           <span onClick={handleGoBack}>

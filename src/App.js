@@ -6,6 +6,7 @@ import Login from "./components/Login/Login";
 import System from "./components/System/System";
 import AddNewSpecies from "./components/System/RareSpecies/AddNewSpecies";
 import EditSpecies from "./components/System/RareSpecies/EditSpecies";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -17,11 +18,23 @@ function App() {
             <Route path="" element={<PrivateRoute />}>
               <Route exact path="/" element={<System />} />
               <Route path="/them-moi" element={<AddNewSpecies />} />
-              <Route path="/cap-nhat" element={<EditSpecies />} />
+              <Route path="/cap-nhat/:id" element={<EditSpecies />} />
             </Route>
           </Routes>
         </AuthProvider>
       </Router>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
